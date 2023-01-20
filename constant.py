@@ -1,4 +1,4 @@
-CENSUS_FTP_URI = 'ftp2.census.gov'
+CENSUS_FTP_URI = 'ftp://ftp2.census.gov'
 
 
 CENSUS_DATA_URL = {
