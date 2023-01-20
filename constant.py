@@ -1,0 +1,1 @@
+CONGRESSIONAL_DISTRICT_CODES_URL = 'https://www2.census.gov/geo/docs/reference/codes/files/national_cd113.txt'
