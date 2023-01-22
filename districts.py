@@ -34,12 +34,13 @@ def get_district_codes(
     if ( not (paths.DISTRICT_CODES_DIR).is_dir() ):
         (paths.DISTRICT_CODES_DIR).mkdir(parents = True, exist_ok = True)
 
-    utils.ftp_download_file(
-        url      = url,
-        path     = census.DATA_URL['DISTRICT_CODES'],
-        filename = census.FILE['DISTRICT_CODES'],
-        save_to  = paths.DISTRICT_CODES_PATH
-    )
+    if ( not (paths.DISTRICT_CODES_PATH).is_file() ):
+        utils.ftp_download_file(
+            url      = url,
+            path     = census.DATA_URL['DISTRICT_CODES'],
+            filename = census.FILE['DISTRICT_CODES'],
+            save_to  = paths.DISTRICT_CODES_PATH
+        )
     
     with open( paths.DISTRICT_CODES_PATH, 'r' ) as fin:
         data   = fin.readlines()
