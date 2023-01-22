@@ -63,4 +63,13 @@ def get_district_codes(
         ]
     )
 
-get_district_codes()
+
+if __name__ == '__main__':
+    try:
+        get_district_codes()
+
+    except KeyboardInterrupt:
+        print('Program was terminated')
+    
+    except Exception as e:
+        print(e)
