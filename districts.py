@@ -5,6 +5,7 @@ from typing import NamedTuple, List
 
 import census
 import paths
+import utils
 
 
 Header = List[str]
@@ -31,16 +32,15 @@ def get_district_codes(
     default delimeter is r'\s'.
     '''
     if ( not (paths.DISTRICT_CODES_DIR).is_dir() ):
-        (paths.Districts).mkdir(parents = True, exist_ok = True)
+        (paths.DISTRICT_CODES_DIR).mkdir(parents = True, exist_ok = True)
 
-    with FTP( url ) as ftp:
-        ftp.login()
-        ftp.cwd( census.DATA_URL['DISTRICT_CODES'] )
-        print(ftp.nlst())
-
-        with open( paths.DISTRICT_CODES_PATH, 'wb' ) as file:
-            ftp.retrbinary(f'RETR {census.FILE["DISTRICT_CODES"]}', file.write)
-
+    utils.ftp_download_file(
+        url      = url,
+        path     = census.DATA_URL['DISTRICT_CODES'],
+        filename = census.FILE['DISTRICT_CODES'],
+        save_to  = paths.DISTRICT_CODES_PATH
+    )
+    
     with open( paths.DISTRICT_CODES_PATH, 'r' ) as fin:
         data   = fin.readlines()
     
