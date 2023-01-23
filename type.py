@@ -4,10 +4,10 @@ from typing import (
 )
 
 
-Filenames = List[str]
+Filename   = str
+Filenames  = List[Filename]
 
-
-Header    = List[str]
+Header     = List[str]
 
 
 class Row(NamedTuple):
