@@ -1,10 +1,11 @@
+from pathlib import Path
 from typing import (
     List,
     NamedTuple
 )
 
 
-Filename   = str
+Filename   = Path
 Filenames  = List[Filename]
 
 Header     = List[str]
