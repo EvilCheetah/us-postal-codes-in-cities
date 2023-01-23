@@ -7,6 +7,11 @@ import widgets
 from type import Filenames
 
 
+def create_folder_if_not_exist(path: Path) -> None:
+    if ( not path.is_dir() ):
+        path.mkdir(parents = True, exist_ok = True)
+
+
 def ftp_download_file(
     url:      str,
     path:     str,
