@@ -5,7 +5,7 @@ import utils
 from type import Filename
 
 
-def get_postal_codes(
+def get_postal_codes_file(
     url: str = census.FTP_URI
 ) -> Filename:
     '''
