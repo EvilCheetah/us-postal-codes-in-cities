@@ -7,8 +7,7 @@ import utils
 def get_places_files(
     url: str = census.FTP_URI
 ) -> None:
-    if ( not (paths.PLACES_DIR).is_dir() ):
-        paths.PLACES_DIR.mkdir(parents = True, exist_ok = True)
+    utils.create_folder_if_not_exist( paths.PLACES_DIR )
     
     if not (
         len( list(paths.PLACES_FILES) ) == 

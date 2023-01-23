@@ -16,8 +16,7 @@ def get_district_codes(
     For some strange reason, header was shifted. Probably because
     default delimeter is r'\s'.
     '''
-    if ( not (paths.DISTRICT_CODES_DIR).is_dir() ):
-        (paths.DISTRICT_CODES_DIR).mkdir(parents = True, exist_ok = True)
+    utils.create_folder_if_not_exist( paths.DISTRICT_CODES_DIR )
 
     if ( not (paths.DISTRICT_CODES_PATH).is_file() ):
         print(message.MISSING_FILE('District Codes'))
