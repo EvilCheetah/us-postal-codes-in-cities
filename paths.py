@@ -8,6 +8,6 @@ DISTRICT_CODES_DIR  = INPUT_DATA_FOLDER / Path('districts')
 DISTRICT_CODES_FILE = Path( census.FILE['DISTRICT_CODES'] )
 DISTRICT_CODES_PATH = DISTRICT_CODES_DIR / DISTRICT_CODES_FILE
 
-PLACES_CODES_DIR    = INPUT_DATA_FOLDER / Path('places')
-PLACES_CODES_FILE   = lambda filename: (PLACES_CODES_DIR / Path(filename)) 
-PLACES_CODES_FILES  = PLACES_CODES_DIR.glob('*_place.zip')
+PLACES_DIR          = INPUT_DATA_FOLDER / Path('places')
+PLACES_FILE         = lambda filename: (PLACES_DIR / Path(filename)) 
+PLACES_FILES        = PLACES_DIR.glob('*_place.zip')
