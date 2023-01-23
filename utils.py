@@ -52,3 +52,4 @@ def _ftp_download_file_with_progress_bar(
         pbar += len(data)
 
     ftp.retrbinary(f'RETR {filename}', write_file)
+    pbar.finish()
