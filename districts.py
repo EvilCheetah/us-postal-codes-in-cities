@@ -1,24 +1,8 @@
 import re
-from ftplib import FTP
-from pathlib import Path
-from typing import NamedTuple, List
-
 import census
 import paths
 import utils
-
-
-Header = List[str]
-
-class Row(NamedTuple):
-    STATE:    str
-    STATEFP:  str
-    CD113FP:  str
-    NAMELSAD: str
-
-class Districts(NamedTuple):
-    header: Header
-    data:   List[Row]
+from type import Row, Districts
 
 
 def get_district_codes(
