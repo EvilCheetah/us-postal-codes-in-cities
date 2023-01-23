@@ -4,6 +4,7 @@ from pathlib import Path
 from progressbar import ProgressBar
 
 import widgets
+from type import Filenames
 
 
 def ftp_download_file(
@@ -22,6 +23,17 @@ def ftp_download_file(
                 filename = filename,
                 writer   = file
             )
+
+
+def get_files_list(
+    url:    str,
+    path:   str
+) -> Filenames:
+    with FTP( url ) as ftp:
+        ftp.login()
+        ftp.cwd( path )
+
+        return ftp.nlst()
 
 
 def _ftp_download_file_with_progress_bar(
