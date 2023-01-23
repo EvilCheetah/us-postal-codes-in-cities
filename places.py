@@ -2,11 +2,12 @@ import census
 import message
 import paths
 import utils
+from type import Filenames
 
 
 def get_places_files(
     url: str = census.FTP_URI
-) -> None:
+) -> Filenames:
     utils.create_folder_if_not_exist( paths.PLACES_DIR )
     
     if not (
@@ -19,7 +20,7 @@ def get_places_files(
     return paths.PLACES_FILES
 
 
-def _download_places(url: str):
+def _download_places(url: str) -> None:
     files = utils.get_files_list(url, census.DATA_URL['PLACES'])
 
     for file in files:
