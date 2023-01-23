@@ -13,5 +13,6 @@ DATA_URL = {
 
 
 FILE = {
-    'DISTRICT_CODES': 'national_cd113.txt'
+    'DISTRICT_CODES': 'national_cd113.txt',
+    'POSTAL_CODES':   'tl_rd22_us_zcta520.zip'
 }
