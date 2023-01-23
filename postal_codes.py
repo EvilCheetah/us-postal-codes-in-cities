@@ -15,7 +15,7 @@ def get_postal_codes_file(
     '''
     utils.create_folder_if_not_exist( paths.POSTAL_CODES_DIR )
 
-    if ( not (paths.POSTAL_CODES_FILE).is_file() ):
+    if ( not (paths.POSTAL_CODES_PATH).is_file() ):
         print(message.MISSING_FILE('Postal Codes'))
         utils.ftp_download_file(
             url      = url,
@@ -29,7 +29,7 @@ def get_postal_codes_file(
 
 if __name__ == '__main__':
     try:
-        get_postal_codes()
+        get_postal_codes_file()
 
     except KeyboardInterrupt:
         print('Program was terminated')
