@@ -1,5 +1,6 @@
 import re
 import census
+import message
 import paths
 import utils
 from type import Row, Districts
@@ -19,6 +20,7 @@ def get_district_codes(
         (paths.DISTRICT_CODES_DIR).mkdir(parents = True, exist_ok = True)
 
     if ( not (paths.DISTRICT_CODES_PATH).is_file() ):
+        print(message.MISSING_FILE('District Codes'))
         utils.ftp_download_file(
             url      = url,
             path     = census.DATA_URL['DISTRICT_CODES'],
