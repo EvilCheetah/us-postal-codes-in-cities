@@ -10,9 +10,12 @@ def get_district_codes(
     url: str = census.FTP_URI
 ) -> Districts:
     '''
-    Obtains `.txt` from Census website and customly parses it
+    Obtains `.txt` either from 
+        - `local storage` specified in 'paths.INPUT_DATA_FOLDER'
+        - `Census` ftp-server
+    and parses it using custom parser.
 
-    Used a custom parser, due to the issues working with pandas
+    Cusom parser is used due to the issues working with pandas
     For some strange reason, header was shifted. Probably because
     default delimeter is r'\s'.
     '''

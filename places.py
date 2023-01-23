@@ -8,6 +8,11 @@ from type import Filenames
 def get_places_files(
     url: str = census.FTP_URI
 ) -> Filenames:
+    '''
+    Obtains shapefiles either from 
+        - `local storage` specified in 'paths.INPUT_DATA_FOLDER'
+        - `Census` ftp-server
+    '''
     utils.create_folder_if_not_exist( paths.PLACES_DIR )
     
     if not (
