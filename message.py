@@ -1,13 +1,13 @@
 from color import Color
 
 
-def MISSING_FILE(filegroup: str) -> str:
+def MISSING_FILE(filegroup: str) -> None:
     '''
     Structure:
         One or more files in {filegroup} are MISSING\n
         Downloading...
     '''
-    return (
+    print(
        f'{Color.BOLD}One or more files{Color.END} in '
        f'{Color.RED}{filegroup}{Color.END} '
        f'are {Color.RED}{Color.BOLD}MISSING{Color.END}\n'
@@ -15,13 +15,13 @@ def MISSING_FILE(filegroup: str) -> str:
     )
 
 
-def CORRUPT_FILE(filegroup: str) -> str:
+def CORRUPT_FILE(filegroup: str) -> None:
     '''
     Structure:
         One or more files in {filegroup} seems to be CORRUPTED\n
         Re-downloading...
     '''
-    return (
+    print(
        f'{Color.BOLD}One or more files{Color.END} in '
        f'{Color.RED}{filegroup}{Color.END} '
        f'seems to be {Color.RED}{Color.BOLD}CORRUPTED{Color.END}\n'
@@ -29,24 +29,34 @@ def CORRUPT_FILE(filegroup: str) -> str:
     )
 
 
-def INITIATE_INTEGRITY_CHECK(filegroup: str) -> str:
+def INITIATE_INTEGRITY_CHECK(filegroup: str) -> None:
     '''
     Structure:
         Initiating integrity check for {filegroup}...
     '''
-    return (
+    print(
         f'{Color.BOLD}Initiating file-check for{Color.END} '
         f'{Color.GREEN}{filegroup}{Color.END}...'
     )
 
 
-def FINISH_INTEGRITY_CHECK(filegroup: str) -> str:
+def FINISH_INTEGRITY_CHECK(filegroup: str) -> None:
     '''
     Structure:
         All files for {filegroup} are up-to-date!
     '''
-    return (
+    print(
         f'All files for {Color.YELLOW}{filegroup}{Color.END} '
         f'{Color.GREEN}{Color.BOLD}are up-to-date!{Color.END}'
          '\n'
+    )
+
+
+def BEGIN_PROCESSING(filegroup: str) -> None:
+    '''
+    Structure:
+        Begin processing {filegroup}...
+    '''
+    print(
+        f'Begin processing {Color.GREEN}{filegroup}{Color.END}...'
     )
