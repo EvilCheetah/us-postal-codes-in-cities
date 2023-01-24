@@ -1,3 +1,4 @@
+import json
 import geopandas
 from io import BufferedWriter
 from ftplib import FTP
@@ -12,9 +13,20 @@ from type import Filenames
 def load_dataframe_from_file(path: Path, filegroup: str):
     logger.LOAD_FILE_IN(filegroup)
     dataframe = geopandas.read_file(path)
-    logger.SUCCESSFUL_FILE_LOAD()
+    logger.SUCCESS_MESSAGE()
 
     return dataframe
+
+
+def save_data_as_json(
+    path:      Path,
+    data:      dict,
+    filegroup: str
+) -> None:
+    logger.SAVING_DATA(filegroup)
+    with open( path, 'w' ) as fout:
+        json.dump(data, fout)
+    logger.SUCCESS_MESSAGE
 
 
 def create_folder_if_not_exist(path: Path) -> None:
