@@ -26,7 +26,7 @@ def save_data_as_json(
     logger.SAVING_DATA(filegroup)
     with open( path, 'w' ) as fout:
         json.dump(data, fout)
-    logger.SUCCESS_MESSAGE
+    logger.SUCCESS_MESSAGE()
 
 
 def create_folder_if_not_exist(path: Path) -> None:
