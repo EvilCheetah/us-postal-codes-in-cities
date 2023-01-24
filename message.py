@@ -1,7 +1,7 @@
 from color import Color
 
 
-def MISSING_FILE(filegroup: str):
+def MISSING_FILE(filegroup: str) -> str:
     '''
     Structure:
         One or more files in {filegroup} are MISSING\n
@@ -15,7 +15,7 @@ def MISSING_FILE(filegroup: str):
     )
 
 
-def CORRUPT_FILE(filegroup: str):
+def CORRUPT_FILE(filegroup: str) -> str:
     '''
     Structure:
         One or more files in {filegroup} seems to be CORRUPTED\n
@@ -26,4 +26,26 @@ def CORRUPT_FILE(filegroup: str):
        f'{Color.RED}{filegroup}{Color.END} '
        f'seems to be {Color.RED}{Color.BOLD}CORRUPTED{Color.END}\n'
        f'Re-downloading...'
+    )
+
+
+def INITIATE_FILE_CHECK(filegroup: str) -> str:
+    '''
+    Structure:
+        Initiating file-check for {filegroup}...
+    '''
+    return (
+        f'{Color.BOLD}Initiating file-check for{Color.END} '
+        f'{Color.GREEN}{filegroup}{Color.END}...'
+    )
+
+
+def FINISH_FILE_CHECK(filegroup: str) -> str:
+    '''
+    Structure:
+        All files for {filegroup} are up-to-date!
+    '''
+    return (
+        f'All files for {Color.YELLOW}{filegroup}{Color.END} '
+        f'{Color.GREEN}{Color.BOLD}are up-to-date!{Color.END}'
     )
