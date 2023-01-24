@@ -25,3 +25,12 @@ def integrity_check(filegroup: str):
         Bar(marker = '#', left = '[', right = ']'), ' ',
         ETA()
     ]
+
+def processing_file(filegroup: str):
+    return [
+        f'Processing '
+        f'{Color.GREEN}{Color.BOLD}{filegroup}{Color.END}: ',
+        Percentage(), ' ',
+        Bar(marker = '#', left = '[', right = ']'), ' ',
+        ETA()
+    ]
