@@ -24,7 +24,7 @@ def get_postal_codes_file(
     )
     logger.FINISH_INTEGRITY_CHECK('Postal Codes')
     
-    return paths.POSTAL_CODES_FILE
+    return paths.POSTAL_CODES_PATH
 
 
 if __name__ == '__main__':
