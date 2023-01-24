@@ -18,32 +18,29 @@ from postal_codes import get_postal_codes_file
 
 
 def main():
-    # Store Postal Codes
-    # districts         = get_district_codes()
-    # places_files      = get_places_files()
-
-    p_codes = utils.load_dataframe_from_file(
+    district_codes         = get_district_codes()
+    places_dataframe       = utils.load_dataframe_from_file(
+        path      = get_places_files,
+        filegroup = 'Places'
+    )
+    postal_codes_dataframe = utils.load_dataframe_from_file(
         path      = get_postal_codes_file(), 
         filegroup = "Postal Codes"
     )
 
     p_data  = []
-    
-    for row in p_codes.itertuples():
+    for row in postal_codes_dataframe.itertuples():
         p_data.append({
             'postal_code': row.ZCTA5CE20,
             'latitude':    row.INTPTLAT20,
             'longitude':   row.INTPTLON20
         })
-        
-    with open( paths.POSTAL_CODES_OUT_FILE, 'w') as fout:
-        json.dump(p_data, fout)
-        logger.SUCCESSFUL_FILE_SAVE('Postal Codes')
 
-#     print('Saving Postal Codes...')
-#     with open( Path('out') / Path('postal-codes') / Path('postal-codes.json'), 'w' ) as fout:
-#         json.dump(postal_codes, fout, indent = 4)
-#     print('Postal Codes Saved!')
+    utils.save_data_as_json(
+        path      = paths.POSTAL_CODES_OUT_FILE,
+        data      = p_data,
+        filegroup = 'Postal Codes'
+    )
 
 #     for state_folder in [
 #         entry 
