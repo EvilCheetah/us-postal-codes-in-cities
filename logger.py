@@ -89,4 +89,8 @@ def SAVING_DATA(filegroup: str) -> None:
 
 
 def SUCCESS_MESSAGE() -> None:
+    '''
+    Structure:
+        SUCCESS!
+    '''
     print(f'{Color.GREEN}{Color.BOLD}SUCCESS!{Color.END}')
