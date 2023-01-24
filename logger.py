@@ -76,16 +76,17 @@ def LOAD_FILE_IN(filegroup: str) -> None:
     )
 
 
-def SUCCESSFUL_FILE_LOAD() -> None:
-    print(f'{Color.GREEN}{Color.BOLD}SUCCESS!{Color.END}')
-
-
-def SUCCESSFUL_FILE_SAVE(filegroup: str) -> None:
+def SAVING_DATA(filegroup: str) -> None:
     '''
     Structure
-        {filegroup} data was saved!
+        Saving {filegroup} data...
     '''
     print(
-        f'{Color.GREEN}{Color.BOLD}{filegroup}{Color.END}'
-        f' data was {Color.UNDERLINE}saved{Color.END}!'
+        f'Saving '
+        f'{Color.GREEN}{Color.BOLD}{filegroup}{Color.END} '
+        f'data... '
     )
+
+
+def SUCCESS_MESSAGE() -> None:
+    print(f'{Color.GREEN}{Color.BOLD}SUCCESS!{Color.END}')
