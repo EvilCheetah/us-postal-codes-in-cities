@@ -16,7 +16,7 @@ def get_places_files(
         - `local storage` specified in 'paths.INPUT_DATA_FOLDER'
         - `Census` ftp-server
     '''
-    print( message.INITIATE_INTEGRITY_CHECK('PLACES') )
+    print( message.INITIATE_INTEGRITY_CHECK('Places') )
     utils.create_folder_if_not_exist( paths.PLACES_DIR )
     
     for file in progressbar(
