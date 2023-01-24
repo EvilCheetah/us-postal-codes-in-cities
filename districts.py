@@ -1,6 +1,6 @@
 import re
 import census
-import message
+import logger
 import paths
 import utils
 from type import Row, Districts
@@ -19,7 +19,7 @@ def get_district_codes(
     For some strange reason, header was shifted. Probably because
     default delimeter is r'\s'.
     '''
-    message.INITIATE_INTEGRITY_CHECK('District Codes')
+    logger.INITIATE_INTEGRITY_CHECK('District Codes')
     utils.create_folder_if_not_exist( paths.DISTRICT_CODES_DIR )
     utils.check_file_presence(
         url       = url,
@@ -28,7 +28,7 @@ def get_district_codes(
         filegroup = 'District Codes',
         save_to   = paths.DISTRICT_CODES_PATH
     )
-    message.FINISH_INTEGRITY_CHECK('District Codes')
+    logger.FINISH_INTEGRITY_CHECK('District Codes')
     
     with open( paths.DISTRICT_CODES_PATH, 'r' ) as fin:
         data   = fin.readlines()
