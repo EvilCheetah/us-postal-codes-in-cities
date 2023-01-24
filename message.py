@@ -29,10 +29,10 @@ def CORRUPT_FILE(filegroup: str) -> str:
     )
 
 
-def INITIATE_FILE_CHECK(filegroup: str) -> str:
+def INITIATE_INTEGRITY_CHECK(filegroup: str) -> str:
     '''
     Structure:
-        Initiating file-check for {filegroup}...
+        Initiating integrity check for {filegroup}...
     '''
     return (
         f'{Color.BOLD}Initiating file-check for{Color.END} '
@@ -40,7 +40,7 @@ def INITIATE_FILE_CHECK(filegroup: str) -> str:
     )
 
 
-def FINISH_FILE_CHECK(filegroup: str) -> str:
+def FINISH_INTEGRITY_CHECK(filegroup: str) -> str:
     '''
     Structure:
         All files for {filegroup} are up-to-date!
