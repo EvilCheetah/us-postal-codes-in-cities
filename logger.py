@@ -84,7 +84,9 @@ def SAVING_DATA(filegroup: str) -> None:
     print(
         f'Saving '
         f'{Color.GREEN}{Color.BOLD}{filegroup}{Color.END} '
-        f'data... '
+        f'data... ',
+        end   = '',
+        flush = ''
     )
 
 
