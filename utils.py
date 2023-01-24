@@ -40,7 +40,7 @@ def download_file_if_not_exist(
     If not downloads it from FTP server using params
     '''
     if ( not save_to.is_file() ):
-        print( message.MISSING_FILE(filegroup) )
+        message.MISSING_FILE(filegroup)
         ftp_download_file(
             url      = url,
             path     = path,
@@ -62,7 +62,7 @@ def download_file_if_corrupt(
     FTP server
     '''
     if ( not is_same_volume(url, path, filename, save_to) ):
-        print( message.CORRUPT_FILE(filegroup) )
+        message.CORRUPT_FILE(filegroup)
         ftp_download_file(
             url      = url,
             path     = path,

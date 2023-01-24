@@ -13,7 +13,7 @@ def get_postal_codes_file(
         - `local storage` specified in 'paths.INPUT_DATA_FOLDER'
         - `Census` ftp-server
     '''
-    print( message.INITIATE_INTEGRITY_CHECK('Postal Codes') )
+    message.INITIATE_INTEGRITY_CHECK('Postal Codes')
     utils.create_folder_if_not_exist( paths.POSTAL_CODES_DIR )
     utils.check_file_presence(
         url       = url,
@@ -22,7 +22,7 @@ def get_postal_codes_file(
         filegroup = 'Postal Codes',
         save_to   = paths.POSTAL_CODES_PATH
     )
-    print( message.FINISH_INTEGRITY_CHECK('Postal Codes') )
+    message.FINISH_INTEGRITY_CHECK('Postal Codes')
     
     return paths.POSTAL_CODES_FILE
 
