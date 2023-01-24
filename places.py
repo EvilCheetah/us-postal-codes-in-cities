@@ -1,7 +1,10 @@
+from progressbar import progressbar
+
 import census
-import message
 import paths
 import utils
+import message
+import widgets
 from type import Filenames
 
 
@@ -13,28 +16,23 @@ def get_places_files(
         - `local storage` specified in 'paths.INPUT_DATA_FOLDER'
         - `Census` ftp-server
     '''
+    print( message.INITIATE_INTEGRITY_CHECK('PLACES') )
     utils.create_folder_if_not_exist( paths.PLACES_DIR )
     
-    if not (
-        len( list(paths.PLACES_FILES) ) == 
-        len( utils.get_files_list(url, census.DATA_URL['PLACES']) )
+    for file in progressbar(
+        iterator = utils.get_files_list(url, census.DATA_URL['PLACES']),
+        widgets  = widgets.integrity_check('Places'),
     ):
-        print(message.MISSING_FILE('Places'))
-        _download_places(url)
+        utils.check_file_presence(
+            url       = url,
+            path      = census.DATA_URL['PLACES'],
+            filename  = file,
+            filegroup = 'Places',
+            save_to   = paths.PLACES_FILE(file)
+        )
+    print( message.FINISH_INTEGRITY_CHECK('PLACES') )
     
     return paths.PLACES_FILES
-
-
-def _download_places(url: str) -> None:
-    files = utils.get_files_list(url, census.DATA_URL['PLACES'])
-
-    for file in files:
-        utils.ftp_download_file(
-            url      = url,
-            path     = census.DATA_URL['PLACES'],
-            filename = file,
-            save_to  = paths.PLACES_FILE(file)
-        )
 
 
 if __name__ == '__main__':
