@@ -19,10 +19,6 @@ from postal_codes import get_postal_codes_file
 
 def main():
     district_codes         = get_district_codes()
-    places_dataframe       = utils.load_dataframe_from_file(
-        path      = get_places_files,
-        filegroup = 'Places'
-    )
     postal_codes_dataframe = utils.load_dataframe_from_file(
         path      = get_postal_codes_file(), 
         filegroup = "Postal Codes"
