@@ -48,4 +48,5 @@ def FINISH_INTEGRITY_CHECK(filegroup: str) -> str:
     return (
         f'All files for {Color.YELLOW}{filegroup}{Color.END} '
         f'{Color.GREEN}{Color.BOLD}are up-to-date!{Color.END}'
+         '\n'
     )
