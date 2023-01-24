@@ -1,3 +1,4 @@
+import geopandas
 from io import BufferedWriter
 from ftplib import FTP
 from pathlib import Path
@@ -6,6 +7,14 @@ from progressbar import ProgressBar
 import logger
 import widgets
 from type import Filenames
+
+
+def load_dataframe_from_file(path: Path, filegroup: str):
+    logger.LOAD_FILE_IN(filegroup)
+    dataframe = geopandas.read_file(path)
+    logger.SUCCESSFUL_FILE_LOAD()
+
+    return dataframe
 
 
 def create_folder_if_not_exist(path: Path) -> None:
