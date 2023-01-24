@@ -3,13 +3,72 @@ from ftplib import FTP
 from pathlib import Path
 from progressbar import ProgressBar
 
+import message
 import widgets
 from type import Filenames
 
 
 def create_folder_if_not_exist(path: Path) -> None:
+    '''
+    Checks if provided path exists,
+    If not creates it
+    '''
     if ( not path.is_dir() ):
         path.mkdir(parents = True, exist_ok = True)
+
+
+def check_file_presence(
+    url:       str,
+    path:      str,
+    filename:  str,
+    filegroup: str,
+    save_to:   Path
+) -> None:
+    download_file_if_not_exist(url, path, filename, filegroup, save_to)
+    download_file_if_corrupt(url, path, filename, filegroup, save_to)
+
+
+def download_file_if_not_exist(
+    url:       str,
+    path:      str,
+    filename:  str,
+    filegroup: str,
+    save_to:   Path
+) -> None:
+    '''
+    Check if file exists,
+    If not downloads it from FTP server using params
+    '''
+    if ( not save_to.is_file() ):
+        print( message.MISSING_FILE(filegroup) )
+        ftp_download_file(
+            url      = url,
+            path     = path,
+            filename = filename,
+            save_to  = save_to
+        )
+
+
+def download_file_if_corrupt(
+    url:       str,
+    path:      str,
+    filename:  str,
+    filegroup: str,
+    save_to:   Path
+) -> None:
+    '''
+    Checks if file in the local storage is not corrupted
+    (now via the volume), if so, re-downloads it from
+    FTP server
+    '''
+    if ( not is_same_volume(url, path, filename, save_to) ):
+        print( message.CORRUPT_FILE(filegroup) )
+        ftp_download_file(
+            url      = url,
+            path     = path,
+            filename = filename,
+            save_to  = save_to
+        )
 
 
 def ftp_download_file(
@@ -18,6 +77,9 @@ def ftp_download_file(
     filename: str,
     save_to:  Path
 ) -> None:
+    '''
+    Downloads file from FTP server using provided information
+    '''
     with FTP( url ) as ftp:
         ftp.login()
         ftp.cwd( path )
@@ -34,6 +96,10 @@ def get_files_list(
     url:    str,
     path:   str
 ) -> Filenames:
+    '''
+    Obtains a list of files in the desired folder
+    on FTP server
+    '''
     with FTP( url ) as ftp:
         ftp.login()
         ftp.cwd( path )
@@ -41,17 +107,40 @@ def get_files_list(
         return ftp.nlst()
 
 
+def is_same_volume(
+    url:      str,
+    path:     str,
+    filename: str,
+    file:     Path
+) -> bool:
+    '''
+    Checks whether the file in the local storage
+    is the same volume as on FTP server
+    '''
+    with FTP( url ) as ftp:
+        ftp.login()
+        ftp.cwd( path )
+
+        return ( ftp.size(filename) == file.stat().st_size )
+
+
 def _ftp_download_file_with_progress_bar(
     ftp: FTP,
     filename: str,
     writer: BufferedWriter,
 ) -> int:
+    '''
+    Downloads the file with Progress Bar
+    '''
     size = ftp.size( filename )
 
     pbar = ProgressBar(widgets = widgets.ftp_download(filename), max_value = size)
     pbar.start()
 
     def write_file(data):
+        '''
+        Callback function that provides updates to ProgressBar
+        '''
         writer.write(data)
         nonlocal pbar
         pbar += len(data)
