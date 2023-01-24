@@ -55,8 +55,26 @@ def FINISH_INTEGRITY_CHECK(filegroup: str) -> None:
 def BEGIN_PROCESSING(filegroup: str) -> None:
     '''
     Structure:
-        Begin processing {filegroup}...
+        Begin processing {filegroup}
     '''
     print(
-        f'Begin processing {Color.GREEN}{filegroup}{Color.END}...'
+        f'Begin processing {Color.GREEN}{filegroup}{Color.END}'
     )
+
+
+def LOAD_FILE_IN(filegroup: str) -> None:
+    '''
+    Structure:
+        Loading in {filegroup} file...
+    '''
+    print(
+        f'Loading in '
+        f'{Color.YELLOW}{filegroup}{Color.END} '
+        f'file... ',
+        end   = '',
+        flush = True
+    )
+
+
+def SUCCESSFUL_FILE_LOAD() -> None:
+    print(f'{Color.GREEN}{Color.BOLD}SUCCESS!{Color.END}')
