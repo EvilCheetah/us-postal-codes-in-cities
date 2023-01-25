@@ -1,3 +1,4 @@
+import re
 import json
 import geopandas
 from progressbar import progressbar
@@ -38,11 +39,13 @@ def main():
         filegroup = 'Postal Codes'
     )
 
-#     for state_folder in [
-#         entry 
-#         for entry in Path('in').iterdir()
-#         if entry.is_dir()
-#     ]:
+    for place_file in get_places_files():
+        state_abbr   = utils.get_state_abbreviation(place_file.name, district_codes)
+
+        state_cities = utils.load_dataframe_from_file(
+            path      = place_file,
+            filegroup = f'{state_abbr} - Cities'
+        )
 #         for shx_file in state_folder.glob('*.shx'):
 #             state_cities = geopandas.read_file( shx_file )
 
