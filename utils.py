@@ -11,6 +11,9 @@ from type import Filenames
 
 
 def load_dataframe_from_file(path: Path, filegroup: str):
+    '''
+    Loads dataframe in from the provided `.zip` file
+    '''
     logger.LOAD_FILE_IN(filegroup)
     dataframe = geopandas.read_file(path)
     logger.SUCCESS_MESSAGE()
@@ -23,6 +26,9 @@ def save_data_as_json(
     data:      dict,
     filegroup: str
 ) -> None:
+    '''
+    Saves dictionary as `.json` file
+    '''
     logger.SAVING_DATA(filegroup)
     with open( path, 'w' ) as fout:
         json.dump(data, fout)
@@ -45,6 +51,10 @@ def check_file_presence(
     filegroup: str,
     save_to:   Path
 ) -> None:
+    '''
+    Wraps checking existence of the file and
+    its integrity(via file volume)
+    '''
     download_file_if_not_exist(url, path, filename, filegroup, save_to)
     download_file_if_corrupt(url, path, filename, filegroup, save_to)
 
