@@ -1,3 +1,4 @@
+import re
 import json
 import geopandas
 from io import BufferedWriter
@@ -7,7 +8,28 @@ from progressbar import ProgressBar
 
 import logger
 import widgets
-from type import Filenames
+from type import Filenames, Districts
+
+
+STATE_FP_PATTERN = r'.*_(\d\d)_.*'
+
+
+def get_state_abbreviation(
+    filename:  str,
+    districts: Districts,
+) -> str:
+    '''
+    Returns a state abbreviation from Districts
+    based on the filename
+    '''
+    state_fp = re.match(STATE_FP_PATTERN, filename) \
+                 .group(1)
+
+    return next(
+        item.STATE
+        for item in districts.data
+        if item.STATEFP == state_fp
+    )
 
 
 def load_dataframe_from_file(path: Path, filegroup: str):
