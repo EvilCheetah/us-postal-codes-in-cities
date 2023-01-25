@@ -95,4 +95,4 @@ def SUCCESS_MESSAGE() -> None:
     Structure:
         SUCCESS!
     '''
-    print(f'{Color.GREEN}{Color.BOLD}SUCCESS!{Color.END}')
+    print(f'{Color.GREEN}{Color.BOLD}SUCCESS!{Color.END}\n')
