@@ -49,7 +49,11 @@ def main():
 
         state_cities = []
 
-        for state_city_entry in state_cities_dataframe.itertuples():
+        for state_city_entry in progressbar(
+            iterator  = state_cities_dataframe.itertuples(),
+            max_value = len(state_cities_dataframe.index),
+            widgets   = widgets.processing_intersections(state_abbr)
+        ):
             postal_codes_in_city = utils.get_postal_codes_intersections(
                 state_city_entry, postal_codes_dataframe
             )
@@ -62,13 +66,11 @@ def main():
                 'postal_codes':       list(postal_codes_in_city)
             })
 
-            with open(
-                paths.PLACES_OUT_FILE(state_abbr),
-                'w',
-                encoding = 'utf-8'
-            ) as fout:
-                json.dump(state_cities, fout, indent = 4, ensure_ascii = False)
-    
+        utils.save_data_as_json(
+            path = paths.PLACES_OUT_FILE(state_abbr),
+            data = state_cities,
+            filegroup = f'{state_abbr} - Cities'
+        )
     
 
 
