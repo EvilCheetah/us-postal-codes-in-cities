@@ -257,8 +257,9 @@ def _has_polygon(intersection) -> bool:
     '''
     return (
         (type(intersection) is GeometryCollection) and
+        (not intersection.is_empty)                and
         any(
-            _is_polygon(i)
-            for i in intersection
+            _is_polygon(shape)
+            for shape in intersection.geoms
         )
     )
