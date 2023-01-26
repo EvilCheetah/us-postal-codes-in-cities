@@ -76,9 +76,9 @@ def save_data_as_json(
     Saves dictionary as `.json` file
     '''
     logger.SAVING_DATA(filegroup)
-    with open( path, 'w' ) as fout:
-        json.dump(data, fout)
-    logger.SUCCESS_MESSAGE()
+    with open( path, 'w', encoding = 'utf-8') as fout:
+        json.dump(data, fout, indent = 4, ensure_ascii = False)
+    logger.SUCCESS_MESSAGE(add_new_line = True)
 
 
 def create_folder_if_not_exist(path: Path) -> None:
