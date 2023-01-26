@@ -53,27 +53,14 @@ def main():
             postal_codes_in_city = utils.get_postal_codes_intersections(
                 state_city_entry, postal_codes_dataframe
             )
-#                         intersection = type(row.geometry.intersection(p_row.geometry))
 
-#                         if (intersection is Polygon)      or   \
-#                            (intersection is MultiPolygon) or   \
-#                            (intersection is GeometryCollection):
-
-#                             postal_codes.append(p_row.ZCTA5CE20)
-#                             print('{')
-#                             print(f"    'city_name':   {row.NAME},\n".encode('utf8'))
-#                             print(f"    'postal_code': {p_row.ZCTA5CE20},\n".encode('utf8'))
-#                             print(f"    'state':       {STATES[row.STATEFP]},\n".encode('utf8'))
-#                             print(f"    'geometry':    {type(row.geometry.intersection(p_row.geometry))},\n".encode('utf8'))
-#                             print('}\n')
-                
-#                 cities.append({
-#                     'state_abbreviation': STATES[row.STATEFP],
-#                     'city_name':          row.NAME,
-#                     'latitude':           row.INTPTLAT,
-#                     'longitude':          row.INTPTLON,
-#                     'postal_codes':       list(postal_codes)
-#                 })
+            state_cities.append({
+                'state_abbreviation': state_abbr,
+                'city_name':          row.NAME,
+                'latitude':           row.INTPTLAT,
+                'longitude':          row.INTPTLON,
+                'postal_codes':       list(postal_codes_in_city)
+            })
 
 #             with open(
 #                 Path('out') / Path('cities') / Path(f'{STATES[row.STATEFP]}_cities.json'),
