@@ -62,12 +62,12 @@ def main():
                 'postal_codes':       list(postal_codes_in_city)
             })
 
-#             with open(
-#                 Path('out') / Path('cities') / Path(f'{STATES[row.STATEFP]}_cities.json'),
-#                 'w',
-#                 encoding = 'utf-8'
-#             ) as fout:
-#                 json.dump(cities, fout, indent = 4, ensure_ascii = False)
+            with open(
+                paths.PLACES_OUT_FILE(state_abbr),
+                'w',
+                encoding = 'utf-8'
+            ) as fout:
+                json.dump(state_cities, fout, indent = 4, ensure_ascii = False)
     
     
 
