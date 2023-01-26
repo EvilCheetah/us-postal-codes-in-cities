@@ -56,9 +56,9 @@ def main():
 
             state_cities.append({
                 'state_abbreviation': state_abbr,
-                'city_name':          row.NAME,
-                'latitude':           row.INTPTLAT,
-                'longitude':          row.INTPTLON,
+                'city_name':          state_city_entry.NAME,
+                'latitude':           state_city_entry.INTPTLAT,
+                'longitude':          state_city_entry.INTPTLON,
                 'postal_codes':       list(postal_codes_in_city)
             })
 
