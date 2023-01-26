@@ -90,9 +90,12 @@ def SAVING_DATA(filegroup: str) -> None:
     )
 
 
-def SUCCESS_MESSAGE() -> None:
+def SUCCESS_MESSAGE(add_new_line: bool = False) -> None:
     '''
     Structure:
         SUCCESS!
     '''
-    print(f'{Color.GREEN}{Color.BOLD}SUCCESS!{Color.END}\n')
+    print(f'{Color.GREEN}{Color.BOLD}SUCCESS!{Color.END}')
+
+    if (add_new_line):
+        print()
