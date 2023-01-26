@@ -42,20 +42,17 @@ def main():
     for place_file in get_places_files():
         state_abbr   = utils.get_state_abbreviation(place_file.name, district_codes)
 
-        state_cities = utils.load_dataframe_from_file(
+        state_cities_dataframe = utils.load_dataframe_from_file(
             path      = place_file,
             filegroup = f'{state_abbr} - Cities'
         )
-#         for shx_file in state_folder.glob('*.shx'):
-#             state_cities = geopandas.read_file( shx_file )
 
-#             cities = []
+        state_cities = []
 
-#             for row in state_cities.itertuples():
-#                 postal_codes = []
-
-#                 for p_row in zips.itertuples():
-#                     if row.geometry.intersects(p_row.geometry):
+        for state_city_entry in state_cities_dataframe.itertuples():
+            postal_codes_in_city = utils.get_postal_codes_intersections(
+                state_city_entry, postal_codes_dataframe
+            )
 #                         intersection = type(row.geometry.intersection(p_row.geometry))
 
 #                         if (intersection is Polygon)      or   \
