@@ -34,3 +34,13 @@ def processing_file(filegroup: str):
         Bar(marker = '#', left = '[', right = ']'), ' ',
         ETA()
     ]
+
+
+def processing_intersections(state_abbr: str):
+    return [
+        f'Processing '
+        f'{Color.GREEN}{Color.BOLD}{state_abbr} - Cities{Color.END}: ',
+        Percentage(), ' ',
+        Bar(marker = '#', left = '[', right = ']'), ' ',
+        ETA()
+    ]
