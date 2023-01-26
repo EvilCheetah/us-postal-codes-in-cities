@@ -5,6 +5,11 @@ from io import BufferedWriter
 from ftplib import FTP
 from pathlib import Path
 from progressbar import ProgressBar
+from shapely import (
+    Polygon,
+    MultiPolygon,
+    GeometryCollection
+)
 
 import logger
 import widgets
@@ -30,6 +35,25 @@ def get_state_abbreviation(
         for item in districts.data
         if item.STATEFP == state_fp
     )
+
+
+def get_postal_codes_intersections(city_entry, postal_codes):
+    '''
+    Returns all intersections of postal codes for a specific city entry
+    '''
+    postal_codes_in_city = []
+
+    for postal_code_entry in postal_codes.itertuples():
+        if (_intersects(city_entry, postal_code_entry)):
+            intersection = _get_intersection(city_entry, postal_code_entry)
+
+            if (
+                _is_polygon(intersection)  or
+                _has_polygon(intersection)
+            ):
+                postal_codes_in_city.append(postal_code_entry.ZCTA5CE20)
+
+    return postal_codes_in_city
 
 
 def load_dataframe_from_file(path: Path, filegroup: str):
@@ -200,3 +224,41 @@ def _ftp_download_file_with_progress_bar(
 
     ftp.retrbinary(f'RETR {filename}', write_file)
     pbar.finish()
+
+
+def _intersects(first_entry, second_entry) -> bool:
+    '''
+    Returns `True` if first entry intersects second
+    '''
+    return first_entry.geometry.intersects(second_entry.geometry)
+
+
+def _get_intersection(first_entry, second_entry):
+    '''
+    Returns intersection type - `shapely` object
+    '''
+    return first_entry.geometry.intersection(second_entry.geometry)
+
+
+def _is_polygon(intersection) -> bool:
+    '''
+    Checks if intersection type is `Polygon` or `MultiPolygon`
+    '''
+    return (
+        (type(intersection) is Polygon)      or
+        (type(intersection) is MultiPolygon)
+    )
+
+
+def _has_polygon(intersection) -> bool:
+    '''
+    Checks if intersection within GeometryCollection is
+    Polygon or MultiPolygon
+    '''
+    return (
+        (type(intersection) is GeometryCollection) and
+        any(
+            _is_polygon(i)
+            for i in intersection
+        )
+    )
