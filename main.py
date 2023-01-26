@@ -39,7 +39,7 @@ def main():
         filegroup = 'Postal Codes'
     )
 
-    for place_file in get_places_files():
+    for place_file in sorted( get_places_files() ):
         state_abbr   = utils.get_state_abbreviation(place_file.name, district_codes)
 
         state_cities_dataframe = utils.load_dataframe_from_file(
