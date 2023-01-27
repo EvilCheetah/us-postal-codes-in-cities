@@ -11,7 +11,7 @@ def MISSING_FILE(filegroup: str) -> None:
        f'{Color.BOLD}One or more files{Color.END} in '
        f'{Color.RED}{filegroup}{Color.END} '
        f'are {Color.RED}{Color.BOLD}MISSING{Color.END}\n'
-       f'{Color.GREEN}{Color.BOLD}Downloading...{Color.END}'
+       f'Initiating {Color.GREEN}{Color.BOLD}Download...{Color.END}'
     )
 
 
@@ -82,7 +82,7 @@ def SAVING_DATA(filegroup: str) -> None:
         Saving {filegroup} data...
     '''
     print(
-        f'Saving '
+        f'Saving     '
         f'{Color.GREEN}{Color.BOLD}{filegroup}{Color.END} '
         f'data... ',
         end   = '',
