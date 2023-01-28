@@ -10,6 +10,7 @@ from shapely import (
     MultiPolygon,
     GeometryCollection
 )
+from shapely.errors import GEOSException
 
 import logger
 import widgets
@@ -117,7 +118,7 @@ def download_file_if_not_exist(
     If not downloads it from FTP server using params
     '''
     if ( not save_to.is_file() ):
-        logger.MISSING_FILE(filegroup)
+        logger.MISSING_FILE(filegroup, filename)
         ftp_download_file(
             url      = url,
             path     = path,
@@ -139,7 +140,7 @@ def download_file_if_corrupt(
     FTP server
     '''
     if ( not is_same_volume(url, path, filename, save_to) ):
-        logger.CORRUPT_FILE(filegroup)
+        logger.CORRUPT_FILE(filegroup, filename)
         ftp_download_file(
             url      = url,
             path     = path,
@@ -226,11 +227,16 @@ def _ftp_download_file_with_progress_bar(
     pbar.finish()
 
 
-def _intersects(first_entry, second_entry) -> bool:
+def _intersects(city_entry, postal_code_entry) -> bool:
     '''
     Returns `True` if first entry intersects second
     '''
-    return first_entry.geometry.intersects(second_entry.geometry)
+    try:
+        return city_entry.geometry.intersects(postal_code_entry.geometry)
+    
+    except GEOSException:
+        logger.SIDE_LOCATION_CONFLICT(city_entry.NAME, postal_code_entry.ZCTA5CE20)
+        return False
 
 
 def _get_intersection(first_entry, second_entry):
