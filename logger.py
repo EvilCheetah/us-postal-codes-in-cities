@@ -1,31 +1,29 @@
 from color import Color
 
 
-def MISSING_FILE(filegroup: str) -> None:
+def MISSING_FILE(filegroup: str, filename: str) -> None:
     '''
     Structure:
-        One or more files in {filegroup} are MISSING\n
-        Downloading...
+        {filename} in {filegroup} found to be MISSING
     '''
     print(
-       f'{Color.BOLD}One or more files{Color.END} in '
+       f'{Color.RED}{filename}{Color.END} in '
        f'{Color.RED}{filegroup}{Color.END} '
-       f'are {Color.RED}{Color.BOLD}MISSING{Color.END}\n'
-       f'Initiating {Color.GREEN}{Color.BOLD}Download...{Color.END}'
+       f'{Color.BOLD}found to be{Color.END} '
+       f'{Color.RED}{Color.BOLD}MISSING{Color.END}'
     )
 
 
-def CORRUPT_FILE(filegroup: str) -> None:
+def CORRUPT_FILE(filegroup: str, filename: str) -> None:
     '''
     Structure:
-        One or more files in {filegroup} seems to be CORRUPTED\n
-        Re-downloading...
+        {filename} in {filegroup} found to be CORRUPTED
     '''
     print(
-       f'{Color.BOLD}One or more files{Color.END} in '
+       f'{Color.RED}{filename}{Color.END} in '
        f'{Color.RED}{filegroup}{Color.END} '
-       f'seems to be {Color.RED}{Color.BOLD}CORRUPTED{Color.END}\n'
-       f'Re-downloading...'
+       f'{Color.BOLD}found to be{Color.END} '
+       f'{Color.RED}{Color.BOLD}CORRUPTED{Color.END}'
     )
 
 
@@ -99,3 +97,15 @@ def SUCCESS_MESSAGE(add_new_line: bool = False) -> None:
 
     if (add_new_line):
         print()
+
+
+def SIDE_LOCATION_CONFLICT(first_item: str, second_item: str) -> None:
+    '''
+    Structure:
+        Found side location conflict between {first_item} and {second_item}
+    '''
+    print(
+        f'Found {Color.RED}{Color.UNDERLINE}side location conflict{Color.END} '
+        f'between {Color.YELLOW}{Color.BOLD}{first_item}{Color.END} '
+        f'and {Color.PURPLE}{Color.BOLD}{second_item}{Color.END}'
+    )
