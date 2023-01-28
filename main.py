@@ -49,6 +49,8 @@ def main():
 
         state_cities = []
 
+        # TODO: Refactor using MultiProcessing Module
+        #       to increase performance
         for state_city_entry in progressbar(
             iterator  = state_cities_dataframe.itertuples(),
             max_value = len(state_cities_dataframe.index),
