@@ -19,17 +19,26 @@ def get_places_files(
     logger.INITIATE_INTEGRITY_CHECK('Places')
     utils.create_folder_if_not_exist( paths.PLACES_DIR )
     
-    for file in progressbar(
-        iterator = utils.get_files_list(url, census.DATA_URL['PLACES']),
-        widgets  = widgets.integrity_check('Places'),
-    ):
-        utils.check_file_presence(
+    files = utils.get_files_list(url, census.DATA_URL['PLACES'])
+
+    for file in files:
+        utils.download_file_if_not_exist(
             url       = url,
             path      = census.DATA_URL['PLACES'],
             filename  = file,
             filegroup = 'Places',
             save_to   = paths.PLACES_FILE(file)
         )
+
+    for file in files:
+        utils.download_file_if_corrupt(
+            url       = url,
+            path      = census.DATA_URL['PLACES'],
+            filename  = file,
+            filegroup = 'Places',
+            save_to   = paths.PLACES_FILE(file) 
+        )
+
     logger.FINISH_INTEGRITY_CHECK('PLACES')
     
     return paths.PLACES_FILES
